@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InterviewLY - Interview Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>InterviewLY</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="practice">Practice</a></li>
+                <li><a href="#" class="nav-link" data-page="history">History</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h2>Master Your Interview Skills</h2>
+                <p>Practice, receive feedback, and improve your performance with our AI-powered interview simulator.</p>
+                <button class="btn primary-btn" id="get-started-btn">Get Started</button>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Technical Interviews</h3>
+                    <p>Practice coding challenges and technical questions commonly asked by top companies.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Behavioral Interviews</h3>
+                    <p>Prepare for questions about your experience, work style, and problem-solving approach.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Detailed Feedback</h3>
+                    <p>Receive personalized feedback to identify strengths and areas for improvement.</p>
+                </div>
+            </div>
+
+            <div class="testimonials">
+                <h2>What Our Users Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"This simulator helped me identify my weaknesses and prepare effectively. I landed my dream job!"</p>
+                        <div class="user">
+                            <p class="name">Sarah M.</p>
+                            <p class="role">Software Engineer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"The immediate feedback after each practice session was invaluable. Highly recommend!"</p>
+                        <div class="user">
+                            <p class="name">James L.</p>
+                            <p class="role">Data Scientist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Page -->
+        <section id="practice" class="page">
+            <div class="practice-container">
+                <!-- Interview Selection -->
+                <div id="interview-selection" class="interview-step active">
+                    <h2>Select Interview Type</h2>
+                    <div class="interview-types">
+                        <div class="interview-type" data-type="technical">
+                            <i class="fas fa-code"></i>
+                            <h3>Technical</h3>
+                            <p>Coding and problem-solving questions</p>
+                        </div>
+                        <div class="interview-type" data-type="behavioral">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Behavioral</h3>
+                            <p>Questions about your experiences and work style</p>
+                        </div>
+                        <div class="interview-type" data-type="situational">
+                            <i class="fas fa-puzzle-piece"></i>
+                            <h3>Situational</h3>
+                            <p>Hypothetical work scenarios</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interview Questions -->
+                <div id="interview-questions" class="interview-step">
+                    <div class="question-header">
+                        <h2>Interview in Progress</h2>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress" id="interview-progress"></div>
+                            </div>
+                            <p class="progress-text"><span id="current-question">1</span>/<span id="total-questions">10</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="question-container">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div class="timer" id="timer">00:00</div>
+                    </div>
+                    
+                    <div class="answer-container">
+                        <div class="input-controls">
+                            <button class="btn" id="record-btn"><i class="fas fa-microphone"></i> Record Answer</button>
+                            <button class="btn" id="stop-btn" disabled><i class="fas fa-stop"></i> Stop Recording</button>
+                        </div>
+                        <textarea id="answer-input" placeholder="Type your answer here..."></textarea>
+                        <div class="btn-group">
+                            <button class="btn secondary-btn" id="skip-btn">Skip Question</button>
+                            <button class="btn primary-btn" id="submit-answer-btn">Submit Answer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feedback -->
+                <div id="question-feedback" class="interview-step">
+                    <div class="feedback-header">
+                        <h2>Question Feedback</h2>
+                    </div>
+                    
+                    <div class="feedback-container">
+                        <div class="feedback-section">
+                            <h3>Your Answer:</h3>
+                            <p id="user-answer"></p>
+                        </div>
+                        
+                        <div class="feedback-section">
+                            <h3>Feedback:</h3>
+                            <p id="feedback-text"></p>
+                        </div>
+                        
+                        <div class="feedback-section">
+                            <h3>Score:</h3>
+                            <div class="score-container">
+                                <div class="score" id="question-score">0</div>
+                                <p>out of 10</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="btn primary-btn" id="next-question-btn">Next Question</button>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div id="interview-summary" class="interview-step">
+                    <div class="summary-header">
+                        <h2>Interview Summary</h2>
+                    </div>
+                    
+                    <div class="summary-container">
+                        <div class="summary-score">
+                            <div class="score-circle">
+                                <div class="score-number" id="overall-score">0</div>
+                                <p>out of 10</p>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-feedback">
+                            <h3>Overall Feedback:</h3>
+                            <p id="overall-feedback"></p>
+                        </div>
+                        
+                        <div class="strength-weaknesses">
+                            <div class="strength-section">
+                                <h3><i class="fas fa-plus-circle"></i> Strengths</h3>
+                                <ul id="strengths-list"></ul>
+                            </div>
+                            <div class="weakness-section">
+                                <h3><i class="fas fa-minus-circle"></i> Areas for Improvement</h3>
+                                <ul id="weaknesses-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="btn secondary-btn" id="review-answers-btn">Review Answers</button>
+                        <button class="btn primary-btn" id="finish-interview-btn">Finish</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Page -->
+        <section id="history" class="page">
+            <h2>Interview History</h2>
+            
+            <div class="history-filters">
+                <select id="history-filter">
+                    <option value="all">All Types</option>
+                    <option value="technical">Technical</option>
+                    <option value="behavioral">Behavioral</option>
+                    <option value="situational">Situational</option>
+                </select>
+                <div class="search-container">
+                    <input type="text" id="history-search" placeholder="Search by date...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+            
+            <div class="history-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Interview Type</th>
+                            <th>Score</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table-body">
+                        <!-- History entries will be added here via JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div id="no-history" class="no-data">
+                    <p>No interview sessions found. Start practicing to see your history!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interview Details Modal -->
+        <div id="interview-details-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Interview Details</h2>
+                
+                <div class="modal-header">
+                    <div class="modal-info">
+                        <p><strong>Date:</strong> <span id="modal-date"></span></p>
+                        <p><strong>Type:</strong> <span id="modal-type"></span></p>
+                        <p><strong>Overall Score:</strong> <span id="modal-score"></span></p>
+                    </div>
+                </div>
+                
+                <div class="modal-body">
+                    <h3>Question Breakdown</h3>
+                    <div id="modal-questions"></div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn secondary-btn close-modal-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 InterviewLY All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
